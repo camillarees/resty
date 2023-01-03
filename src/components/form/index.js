@@ -2,9 +2,9 @@ import React from 'react';
 
 import './form.scss';
 
-class Form extends React.Component {
+function Form(props) {
 
-  handleSubmit = e => {
+  function handleSubmit(e) {
     e.preventDefault();
     const formData = {
       method:'GET',
@@ -12,8 +12,6 @@ class Form extends React.Component {
     };
     this.props.handleApiCall(formData);
   }
-
-  render() {
     return (
       <>
         <form onSubmit={this.handleSubmit}>
@@ -32,6 +30,5 @@ class Form extends React.Component {
       </>
     );
   }
-}
 
 export default Form;
