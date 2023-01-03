@@ -1,9 +1,12 @@
 import React from 'react';
 
-function Results () {
+import './results.scss';
+
+const Results = (props) => {
+  const { data } = props;
     return (
       <section>
-        <pre>{this.props.data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
+        <pre>{data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
       </section>
     );
   }
