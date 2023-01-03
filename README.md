@@ -6,7 +6,7 @@ Camilla Rees
 ### Version
 1.0.0
 
-![UML](assets/lab26-uml.png)
+![UML](./assets/lab-27-uml.png)
 
 ## Deployment
 
@@ -39,4 +39,12 @@ The core requirements and functionality are as follows:
 
 Basic scaffolding of a React App, with intent to build forward-thinking and add more functionality to the system as we go. The initial build sets up the file structure so that we can progressively build this application in a scalable manner.
 
+### Phase 2
+
+Taking in user input in preparation of connecting to live APIs, using the useState() hook in our functional components. 
+
+This phase will allow the user to to enter the REST Method and URL to an API, and see summary of their request as well as results returned from an API request in thier browser in a readable format
+
 ## Credit and Collaborations
+[401d49 Lab 27 Demo]()
+[401d49 Lab 27 Starter Code]()
