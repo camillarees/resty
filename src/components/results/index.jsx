@@ -5,11 +5,15 @@ import './results.scss';
 
 const Results = (props) => {
   const { data } = props;
-    return (
-      <section>
-        <pre data-testid="results-output">{data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
-      </section>
-    );
-  }
+  return (
+    <section>
+      {
+        props.loading ?
+          <pre>Loading...</pre> :
+          <pre data-testid="results-output">{data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
+      }
+    </section>
+  );
+}
 
 export default Results;
