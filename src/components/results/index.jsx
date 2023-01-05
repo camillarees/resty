@@ -5,6 +5,7 @@ import './results.scss';
 
 const Results = (props) => {
   const { data } = props;
+  console.log(data);
   return (
     <section>
       {
