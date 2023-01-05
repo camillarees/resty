@@ -18,8 +18,9 @@ const Form = (props) => {
       url: url,
     };
 
-    props.setLoading();
+    props.setLoading(true);
     props.handleApiCall(formData);
+    props.dispatch({type: 'ADD-REQUEST', payload: formData})
   };  
 
   const handleRestSelection = e => {

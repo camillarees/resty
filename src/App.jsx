@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useReducer } from 'react';
 import axios from 'axios';
 
 import './App.scss';
@@ -9,9 +9,39 @@ import Header from './components/header';
 import Footer from './components/footer';
 import Form from './components/form';
 import Results from './components/results';
+import History from './components/history';
 
 const App = () => {
 
+  let initialState = {
+    requestParams: {},
+    data: {},
+    history: []
+  }
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'ADD-REQUEST':
+        return {
+          ...state,
+          requestParams: {
+            method: action.payload.method,
+            url: action.payload.url
+          }
+        }
+
+      case 'ADD-HISTORY':
+        return {
+          ...state,
+          history: [...state.history, action.payload]
+        };
+
+      default:
+        return state;
+    }
+  }
+
+  const [state, dispatch] = useReducer(reducer, initialState);
   const [apiData, setApiData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
@@ -22,32 +52,40 @@ const App = () => {
   }
 
   useEffect(() => {
-    console.log('something happened once when mounted');
-    async function apiCall(){
-      let response = await axios({
-        method: requestParams.method,
-        url: requestParams.url,
-        data: requestParams.json,
-      });
-      console.log(response);
-      setApiData(response.data)
-      setLoading(false);
-    
+    console.log(state.history);
+  }, [state.history]);
+
+  useEffect(() => {
+    async function apiCall() {
+      if (state.requestParams.url) {
+        dispatch({ type: 'ADD-HISTORY', payload: state.requestParams });
+        let response = await axios({
+          method: state.requestParams.method,
+          url: state.requestParams.url,
+          data: state.requestParams.json,
+        });
+        console.log(response);
+        setApiData(response.data);
+        setLoading(false);
+
+      };
     }
-    if(Object.keys(requestParams).length > 0) {
+
+    if (Object.keys(requestParams).length > 0) {
       apiCall();
     }
-  
-  }, [requestParams]);
+
+  }, [requestParams, state.requestParams]);
 
 
   return (
     <>
       <Header />
-      <div>Request Method: {requestParams.method}</div>
-      <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} />
-      <Results data={apiData} loading={loading}/>
+      <div>Request Method: {state.requestParams.method}</div>
+      <div>URL: {state.requestParams.url}</div>
+      <Form dispatch={dispatch} handleApiCall={callApi} setLoading={setLoading} />
+      <Results data={apiData} loading={loading} />
+      <History history={state.history} />
       <Footer />
     </>
   )
