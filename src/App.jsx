@@ -17,7 +17,7 @@ const App = () => {
   const [loading, setLoading] = useState(false);
 
   const callApi = (requestParams) => {
-    setLoading(false);
+    setLoading(true);
     setRequestParams(requestParams);
   }
 
@@ -25,15 +25,18 @@ const App = () => {
     console.log('something happened once when mounted');
     async function apiCall(){
       let response = await axios({
-        method: 'GET',
+        method: requestParams.method,
         url: requestParams.url,
         data: requestParams.json,
       });
       console.log(response);
       setApiData(response.data)
+      setLoading(false);
     
     }
+    if(Object.keys(requestParams).length > 0) {
       apiCall();
+    }
   
   }, [requestParams]);
 
@@ -43,7 +46,7 @@ const App = () => {
       <Header />
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
-      <Form handleApiCall={callApi} setLoading={setLoading}/>
+      <Form handleApiCall={callApi} />
       <Results data={apiData} loading={loading}/>
       <Footer />
     </>
