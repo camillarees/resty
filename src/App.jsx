@@ -29,6 +29,7 @@ const App = () => {
         url: requestParams.url,
         data: requestParams.json,
       });
+      console.log(response);
       setApiData(response.data)
     
     }

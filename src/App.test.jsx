@@ -1,9 +1,9 @@
 import '@testing-library/jest-dom';
 import { render, screen, fireEvent } from '@testing-library/react';
-import rest from 'msw';
+import { rest } from 'msw';
 import {setupServer} from 'msw/node';
 
-import App from '../src/App.jsx';
+import App from './App.jsx';
 
 const server = setupServer(
     rest.get('/testGet', (req, res, ctx) => {
@@ -30,9 +30,8 @@ describe('App integration', () => {
         fireEvent.click(button);
 
         const preText = await screen.findByTestId('results-output');
+        console.log('preText:', preText);
         expect(preText).toHaveTextContent('ditto');
-
-
 
 
     })
