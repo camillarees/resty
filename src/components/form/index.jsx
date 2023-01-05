@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './form.scss';
 
@@ -19,14 +19,14 @@ const Form = (props) => {
 
     props.setLoading();
     props.handleApiCall(formData);
-  };
+  };  
 
   return (
     <>
     <form onSubmit={handleSubmit}>
       <label>
         <span>URL: </span>
-        <input  data-testid="form-input" name='url' type='text' onChange={(e) => setUrl(e.target.ariaValueMin)}/>
+        <input  data-testid="form-input" name='url' type='text' onChange={(e) => setUrl(e.target.value)}/>
         <button data-testid="go-button" type="submit">GO!</button>
       </label>
       <textarea onChange={(e) => setJsonData(e.target.value)}></textarea>

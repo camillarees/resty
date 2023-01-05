@@ -1,5 +1,5 @@
-import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 import './App.scss';
 
@@ -12,24 +12,30 @@ import Results from './components/results';
 
 const App = () => {
 
-  const [data, setData] = useState(null);
+  const [apiData, setApiData] = useState(null);
   const [requestParams, setRequestParams] = useState({});
   const [loading, setLoading] = useState(false);
 
   const callApi = (requestParams) => {
-    // mock output
-    const data = {
-      count: 2,
-      results: [
-        {name: 'fake thing 1', url: 'http://fakethings.com/1'},
-        {name: 'fake thing 2', url: 'http://fakethings.com/2'},
-      ],
-    };
-
-    setData(data);
     setLoading(false);
     setRequestParams(requestParams);
   }
+
+  useEffect(() => {
+    console.log('something happened once when mounted');
+    async function apiCall(){
+      let response = await axios({
+        method: 'GET',
+        url: requestParams.url,
+        data: requestParams.json,
+      });
+      setApiData(response.data)
+    
+    }
+      apiCall();
+  
+  }, [requestParams]);
+
 
   return (
     <>
@@ -37,7 +43,7 @@ const App = () => {
       <div>Request Method: {requestParams.method}</div>
       <div>URL: {requestParams.url}</div>
       <Form handleApiCall={callApi} setLoading={setLoading}/>
-      <Results data={data} loading={loading}/>
+      <Results data={apiData} loading={loading}/>
       <Footer />
     </>
   )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import './results.scss';
 
@@ -10,7 +10,7 @@ const Results = (props) => {
       {
         props.loading ?
           <pre>Loading...</pre> :
-          <pre data-testid="results-output">{data ? JSON.stringify(this.props.data, undefined, 2) : null}</pre>
+          <pre data-testid="results-output">{data ? JSON.stringify(props.data, undefined, 2) : null}</pre>
       }
     </section>
   );
