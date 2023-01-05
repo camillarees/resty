@@ -6,12 +6,12 @@ Camilla Rees
 ### Version
 1.0.0
 
+![UML2](./assets/lab-29-uml.png)
 ![UML](./assets/lab-27-uml.png)
-![UML2]()
 
 ## Deployment
 
-[Deployed Site]()
+[Deployed Site](https://resty-8eyq.onrender.com/)
 
 ## Overview
 
@@ -52,7 +52,16 @@ Connecting RESTy to live APIs, fetching and displaying remote data. The primary 
 
 The phase will allow the user to enter the URL to an API and issue a GET request so that they can retrieve it’s data, as well as see the results returned from an API request in their browser in a readable format.
 
+### Phase 4
+
+Tracking every API call and storing it in history.
+
+This phase will allow the user to see a list of their previous API calls, so that they can see the results again, quickly.
+
+
 ## Credit and Collaborations
+Worked with [Kenny Lino]()
+[401d49 Lab 29 Demo]()
 [401d49 Lab 28 Demo]()
 [401d49 Lab 27 Demo]()
 [401d49 Lab 26 Starter Code]()
